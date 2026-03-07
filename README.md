@@ -112,7 +112,8 @@ WeeklyMinutesModerateExercise
 BMI 
 6.538369 
 
-  # Install Dyplr first
+#B-2
+# Install Dyplr first
 install.packages("dplyr")
 library(dplyr) # Run Dyplr
 
@@ -120,7 +121,7 @@ grouped_summary <- HINTS_subset |>
 group_by(smokeStat) |>
 summarise(
   across(
-      all_of(continuous_variables),
+    all_of(continuous_variables),
     list(
     Min = ~min(.x, na.rm = TRUE),
     Q1 = ~quantile(.x, 0.25, na.rm = TRUE),
@@ -133,5 +134,24 @@ summarise(
   ),
   .names = "{.col}_{.fn}"
     ))
-  # view summary
-  print(grouped_summary)
+# view summary
+print(grouped_summary)
+# skimr section
+install.packages("skimr")
+library(skimr)
+skim(HINTS_subset)
+skim(HINTS_subset[continuous_variables]) 
+    
+# For question b.3. Writing Functions   
+my_summary_func <- function(data) {
+# Five-number summary and mean
+print(summary(data[continuous_variables]))
+# Standard deviation
+sd_results <- sapply(data[continuous_variables], sd, na.rm = TRUE)
+print(sd_results)
+# Variance
+var_results <- sapply(data[continuous_variables], var, na.rm = TRUE)
+print(var_results) }
+
+# Print
+my_summary_func(HINTS_subse
